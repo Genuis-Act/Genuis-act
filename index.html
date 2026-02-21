@@ -3,242 +3,264 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GENIUS Act | Contact & Media</title>
-
-  <!-- Basic SEO -->
-  <meta name="description" content="Learn about the GENIUS Act and reach us directly. Tap to call, WhatsApp, email, or Telegram." />
-  <meta name="robots" content="index,follow" />
-
-  <style>
-    :root{
-      --bg:#0b0f1a;
-      --card:#0f1630;
-      --line:#1f2a44;
-      --text:#e8eefc;
-      --muted:rgba(232,238,252,.75);
-      --btn:#13214a;
-      --btn2:#0b1022;
-      --radius:18px;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    body{ margin:0; background:var(--bg); color:var(--text); }
-    a{ color:inherit; }
-    header{
-      padding: 28px 18px;
-      background: linear-gradient(180deg, #0b1022, #0b0f1a);
-      border-bottom:1px solid var(--line);
-    }
-    .wrap{ max-width: 980px; margin: 0 auto; }
-    h1{ margin:0 0 8px; font-size: 22px; letter-spacing:.2px; }
-    p{ margin:0; color:var(--muted); line-height:1.4; }
-    main{ padding:18px; }
-    .grid{ display:grid; gap:14px; grid-template-columns: 1fr; }
-    @media(min-width: 900px){ .grid{ grid-template-columns: 1.05fr .95fr; } }
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:14px;
-    }
-    .pill{
-      display:inline-block;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid #2b3b63;
-      font-size:12px;
-      color:var(--muted);
-      margin-right:8px;
-    }
-    .row{ display:flex; gap:10px; flex-wrap:wrap; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:8px;
-      padding: 11px 12px;
-      border-radius: 12px;
-      border:1px solid #2b3b63;
-      background:var(--btn);
-      text-decoration:none;
-      cursor:pointer;
-      font-weight:600;
-    }
-    .btn.secondary{ background:var(--btn2); }
-    .btn:hover{ filter:brightness(1.08); }
-
-    .kv{ display:grid; gap:10px; margin-top:12px; }
-    .kv div{
-      background:#0b1022; border:1px solid var(--line);
-      border-radius:14px; padding:10px;
-    }
-    .kv b{ display:block; font-size:12px; color:var(--muted); margin-bottom:4px; }
-    .kv span{ font-size:14px; }
-
-    .media-grid{
-      display:grid; grid-template-columns: repeat(2, 1fr);
-      gap:10px; margin-top:12px;
-    }
-    @media(min-width: 700px){ .media-grid{ grid-template-columns: repeat(3, 1fr); } }
-    .thumb{
-      background:#0b1022; border:1px solid var(--line);
-      border-radius:14px; padding:8px;
-    }
-    .thumb img, .thumb video{
-      width:100%; height:120px; object-fit:cover; border-radius:12px; display:block;
-    }
-    .thumb small{ display:block; margin-top:6px; color:var(--muted); word-break:break-word; }
-    input[type="file"]{
-      width:100%; box-sizing:border-box; padding:10px;
-      border-radius:12px; border:1px solid #2b3b63;
-      background:#0b1022; color:var(--text);
-    }
-    footer{
-      padding:18px; text-align:center; color:var(--muted);
-      border-top:1px solid var(--line);
-    }
-    .note{
-      margin-top:10px;
-      font-size:12px;
-      color:var(--muted);
-    }
-  </style>
+  <title>GENIUS Act — Insights & Contact</title>
+  <meta name="description" content="Independent informational page: GENIUS Act overview, latest implementation insights, and how to reach us." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-<header>
-  <div class="wrap">
-    <span class="pill">GENIUS Act</span>
-    <span class="pill">Contact Page</span>
-    <h1>GENIUS Act — Info & Contact</h1>
-    <p>
-      This page shares general information and a direct way to reach us.
-      Tap WhatsApp, Call, Email, or Telegram below.
-    </p>
+  <!-- Top Notice -->
+  <div class="top-notice">
+    <div class="container notice-inner">
+      <span class="badge">Independent</span>
+      <span>
+        This is a private informational website. Not affiliated with the U.S. government.
+        For official updates, use the source links below.
+      </span>
+      <a class="notice-link" href="#sources">Sources</a>
+    </div>
   </div>
-</header>
 
-<main class="wrap">
-  <div class="grid">
+  <!-- Header / Hero -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="brand">
+        <!-- Custom (non-official) logo made with inline SVG -->
+        <div class="logo" aria-label="GENIUS Act logo">
+          <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#F5C542"/>
+                <stop offset="1" stop-color="#2B6BFF"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 6l8 14 16 2-12 11 3 16-15-7-15 7 3-16L8 22l16-2 8-14z" fill="url(#g)"/>
+            <circle cx="32" cy="32" r="10" fill="#0B1022" opacity="0.7"/>
+          </svg>
+        </div>
 
-    <!-- LEFT: About + CTAs -->
-    <section class="card">
-      <div class="row" style="justify-content:space-between; align-items:center;">
         <div>
-          <span class="pill">Quick Access</span>
+          <div class="brand-title">
+            <span class="brand-kicker">GENIUS Act</span>
+            <h1>Insights • Updates • Contact</h1>
+          </div>
+          <p class="subtext">
+            A clean landing page for ads: explain the GENIUS Act in simple terms,
+            share credible updates, and let visitors reach you instantly.
+          </p>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <span class="pill">Stablecoin regulation</span>
+          <span class="pill">Implementation watch</span>
           <span class="pill">Mobile friendly</span>
         </div>
-      </div>
 
-      <h2 style="margin:12px 0 6px; font-size:18px;">Reach Us Instantly</h2>
-      <p>
-        Click any button. On mobile, it opens your dialer/WhatsApp/email directly.
-      </p>
+        <h2 class="card-title">Contact us now</h2>
+        <p class="card-text">Tap WhatsApp, Call, Email, or Telegram. Replace the placeholders with your real details.</p>
 
-      <div class="row" style="margin-top:12px;">
-        <!-- Replace the placeholders below -->
-        <a class="btn" id="btnWhatsapp" href="https://wa.me/2348000000000?text=Hi%20I%20found%20your%20GENIUS%20Act%20page%20from%20an%20ad." target="_blank" rel="noopener">
-          WhatsApp
-        </a>
-        <a class="btn" id="btnCall" href="tel:+2348000000000">Call</a>
-        <a class="btn secondary" id="btnEmail" href="mailto:yourname@email.com?subject=GENIUS%20Act%20Inquiry">Email</a>
-        <a class="btn secondary" id="btnTelegram" href="https://t.me/YourTelegramUsername" target="_blank" rel="noopener">
-          Telegram
-        </a>
-      </div>
+        <div class="cta-row">
+          <!-- Replace numbers/handles -->
+          <a class="btn primary" href="https://wa.me/2348000000000?text=Hi%2C%20I%20found%20your%20GENIUS%20Act%20page%20from%20an%20ad." target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn" href="tel:+2348000000000">Call</a>
+          <a class="btn" href="mailto:you@email.com?subject=GENIUS%20Act%20Inquiry">Email</a>
+          <a class="btn" href="https://t.me/YourTelegram" target="_blank" rel="noopener">Telegram</a>
+        </div>
 
-      <div class="kv">
-        <div>
-          <b>Business Name</b>
-          <span id="bizName">[Your Business / Brand Name]</span>
-        </div>
-        <div>
-          <b>Primary Contact</b>
-          <span id="primaryContact">+234 800 000 0000</span>
-        </div>
-        <div>
-          <b>Email</b>
-          <span id="emailText">yourname@email.com</span>
-        </div>
-        <div>
-          <b>Location</b>
-          <span id="locationText">Abuja, Nigeria</span>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="label">Business / Brand</div>
+            <div class="value">[Your Name or Business]</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">Location</div>
+            <div class="value">Abuja, Nigeria</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">Primary Phone</div>
+            <div class="value">+234 800 000 0000</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">Email</div>
+            <div class="value">you@email.com</div>
+          </div>
         </div>
       </div>
+    </div>
+  </header>
 
-      <div class="note">
-        ⚠️ Don’t claim “official government program” unless you are truly authorized.
-        Keep your ad copy honest to avoid Google Ads policy issues.
+  <!-- Content -->
+  <main>
+    <!-- Banners -->
+    <section class="container section">
+      <div class="banner-grid">
+        <div class="banner b1">
+          <div class="banner-title">What the GENIUS Act is</div>
+          <div class="banner-text">
+            A U.S. federal framework for regulating payment stablecoins and their issuers.
+          </div>
+        </div>
+        <div class="banner b2">
+          <div class="banner-title">Why it matters</div>
+          <div class="banner-text">
+            Compliance, reserves, consumer protection, and clearer rules for market participation.
+          </div>
+        </div>
+        <div class="banner b3">
+          <div class="banner-title">What this page is</div>
+          <div class="banner-text">
+            An independent information + contact page for marketing campaigns (not an official portal).
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- RIGHT: Media uploader (client-side preview) -->
-    <aside class="card">
-      <div class="row" style="justify-content:space-between; align-items:center;">
-        <div>
-          <span class="pill">Media</span>
-          <span class="pill">Preview</span>
+    <!-- Quick explainer -->
+    <section class="container section">
+      <div class="two-col">
+        <div class="panel">
+          <h3>Simple explanation</h3>
+          <p>
+            The GENIUS Act (S. 1582) created a federal approach to overseeing payment stablecoins.
+            It requires significant implementation work by agencies through rulemaking and application processes.
+          </p>
+          <div class="mini-cards">
+            <div class="mini">
+              <div class="mini-title">Core idea</div>
+              <div class="mini-text">More clarity + guardrails for stablecoin issuance and oversight.</div>
+            </div>
+            <div class="mini">
+              <div class="mini-title">Implementation</div>
+              <div class="mini-text">Agencies are issuing proposals and guidance to execute the law.</div>
+            </div>
+            <div class="mini">
+              <div class="mini-title">Debate</div>
+              <div class="mini-text">Supporters cite safeguards; critics cite gaps and systemic risks.</div>
+            </div>
+          </div>
         </div>
-        <div id="assetCount" class="pill">0 assets</div>
+
+        <div class="panel">
+          <h3>Administration context (public sources)</h3>
+          <p>
+            The White House published materials about signing S. 1582 into law and related digital asset policy recommendations.
+            This section links to public documents (no campaign branding).
+          </p>
+
+          <div class="link-list">
+            <a class="link-card" href="https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-signs-genius-act-into-law/" target="_blank" rel="noopener">
+              White House fact sheet (signing)
+              <span>July 18, 2025</span>
+            </a>
+            <a class="link-card" href="https://www.whitehouse.gov/briefings-statements/2025/07/the-president-signed-into-law-s-1582/" target="_blank" rel="noopener">
+              “Signed into law: S. 1582”
+              <span>July 18, 2025</span>
+            </a>
+            <a class="link-card" href="https://www.fdic.gov/news/press-releases/2025/fdic-approves-proposal-establish-genius-act-application-procedures-fdic" target="_blank" rel="noopener">
+              FDIC: application procedures proposal
+              <span>Dec 16, 2025</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Insights / News -->
+    <section class="container section" id="insights">
+      <div class="section-head">
+        <h3>GENIUS Act insights & quick news</h3>
+        <p class="muted">
+          Short highlights pulled from reputable public sources. Keep ad copy accurate and avoid “official program” claims.
+        </p>
       </div>
 
-      <h2 style="margin:12px 0 6px; font-size:18px;">Attach Photos / Videos</h2>
-      <p>Upload your banners, flyers, or short videos to preview how they’ll look on the landing page.</p>
+      <div class="news-grid">
+        <article class="news">
+          <div class="news-top">
+            <span class="tag">Implementation</span>
+            <span class="date">Feb 2026</span>
+          </div>
+          <h4>NCUA proposed rule for permitted stablecoin issuer applications</h4>
+          <p>
+            The NCUA issued a proposal outlining a framework for applicants seeking approval—described as an early required
+            rulemaking step under the Act.
+          </p>
+          <a class="read" href="https://www.americascreditunions.org/news-media/news/ncua-issues-first-proposal-implement-genius-act" target="_blank" rel="noopener">Read source</a>
+        </article>
 
-      <label style="display:block; margin-top:10px; font-size:13px; color:var(--muted);">
-        Upload media (images/videos)
-      </label>
-      <input id="assetFiles" type="file" multiple accept="image/*,video/*" />
+        <article class="news">
+          <div class="news-top">
+            <span class="tag">Regulators</span>
+            <span class="date">Dec 2025 → May 2026</span>
+          </div>
+          <h4>FDIC application framework & extended comment timeline</h4>
+          <p>
+            The FDIC approved a proposal on GENIUS Act application procedures, and later extended a comment deadline
+            into May 2026 for additional feedback.
+          </p>
+          <div class="row-links">
+            <a class="read" href="https://www.fdic.gov/news/press-releases/2025/fdic-approves-proposal-establish-genius-act-application-procedures-fdic" target="_blank" rel="noopener">FDIC proposal</a>
+            <a class="read" href="https://www.pwc.com/us/en/industries/financial-services/library/our-take/02-13-2026.html" target="_blank" rel="noopener">PwC note</a>
+          </div>
+        </article>
 
-      <div class="media-grid" id="mediaGrid"></div>
+        <article class="news">
+          <div class="news-top">
+            <span class="tag">Market view</span>
+            <span class="date">Jan 2026</span>
+          </div>
+          <h4>More rules still needed across multiple agencies</h4>
+          <p>
+            Legal and policy trackers note that many rules must still be issued across Treasury and banking regulators to fully implement the Act.
+          </p>
+          <a class="read" href="https://www.klgates.com/Crypto-in-2026-The-Democratization-of-Digital-Assets-1-29-2026" target="_blank" rel="noopener">Read source</a>
+        </article>
 
-      <div class="note">
-        Note: Uploading files here is only a preview in your browser (it doesn’t store files online).
-        If you want permanent media on the site, you’ll add them into the repo (I can show you).
+        <article class="news">
+          <div class="news-top">
+            <span class="tag">Critiques</span>
+            <span class="date">Jan 2026</span>
+          </div>
+          <h4>Some analysts warn about gaps and systemic/national-security risks</h4>
+          <p>
+            Think tanks and consumer groups have raised concerns about whether the framework fully addresses financial and security risk scenarios.
+          </p>
+          <div class="row-links">
+            <a class="read" href="https://www.csis.org/analysis/unstable-coins-stablecoin-regulation-market-structure-legislation-and-us-security-risks" target="_blank" rel="noopener">CSIS analysis</a>
+            <a class="read" href="https://advocacy.consumerreports.org/press_release/house-passes-genius-act-that-fails-to-protect-consumers-in-stablecoin-market/" target="_blank" rel="noopener">Consumer Reports</a>
+          </div>
+        </article>
       </div>
-    </aside>
+    </section>
 
-  </div>
-</main>
+    <!-- Sources -->
+    <section class="container section" id="sources">
+      <div class="panel">
+        <h3>Official / primary references</h3>
+        <ul class="sources">
+          <li><a href="https://www.whitehouse.gov/briefings-statements/2025/07/the-president-signed-into-law-s-1582/" target="_blank" rel="noopener">White House: Signed into law (S. 1582)</a></li>
+          <li><a href="https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-signs-genius-act-into-law/" target="_blank" rel="noopener">White House fact sheet (GENIUS Act signing)</a></li>
+          <li><a href="https://www.fdic.gov/news/press-releases/2025/fdic-approves-proposal-establish-genius-act-application-procedures-fdic" target="_blank" rel="noopener">FDIC: GENIUS Act application procedures proposal</a></li>
+        </ul>
+      </div>
+    </section>
 
-<footer>
-  © <span id="year"></span> — Contact Page
-</footer>
-
-<script>
-  // Update year
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // Media preview only (client-side)
-  const assetFiles = document.getElementById("assetFiles");
-  const mediaGrid  = document.getElementById("mediaGrid");
-  const assetCount = document.getElementById("assetCount");
-
-  function escapeHtml(s){
-    return (s ?? "").replace(/[&<>"']/g, m => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[m]));
-  }
-
-  function renderAssets(files){
-    mediaGrid.innerHTML = "";
-    const list = Array.from(files || []);
-    assetCount.textContent = `${list.length} assets`;
-
-    for (const f of list){
-      const url = URL.createObjectURL(f);
-      const box = document.createElement("div");
-      box.className = "thumb";
-
-      if (f.type.startsWith("image/")){
-        box.innerHTML = `<img src="${url}" alt="asset"/><small>${escapeHtml(f.name)}</small>`;
-      } else if (f.type.startsWith("video/")){
-        box.innerHTML = `<video src="${url}" controls></video><small>${escapeHtml(f.name)}</small>`;
-      } else {
-        box.innerHTML = `<div style="color:rgba(232,238,252,.75)">Unsupported</div><small>${escapeHtml(f.name)}</small>`;
-      }
-      mediaGrid.appendChild(box);
-    }
-  }
-
-  assetFiles.addEventListener("change", (e) => renderAssets(e.target.files));
-</script>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>
+          <div class="footer-title">GENIUS Act — Independent Page</div>
+          <div class="footer-sub">Replace contact details and keep claims accurate for ad compliance.</div>
+        </div>
+        <div class="footer-right">
+          <a href="#insights">Insights</a>
+          <a href="#sources">Sources</a>
+          <a href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Top</a>
+        </div>
+      </div>
+    </footer>
+  </main>
 </body>
 </html>
