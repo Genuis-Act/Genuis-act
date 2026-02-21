@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GENIUS Act – Ads Upload Hub</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    body { margin: 0; background: #0b0f1a; color: #e8eefc; }
+    header { padding: 28px 18px; border-bottom: 1px solid #1f2a44; background: #0b1022; }
+    h1 { margin: 0 0 6px; font-size: 20px; letter-spacing: 0.2px; }
+    p { margin: 0; opacity: 0.85; }
+    main { max-width: 980px; margin: 0 auto; padding: 18px; }
+    .grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+    @media (min-width: 900px){ .grid{ grid-template-columns: 1.2fr 0.8fr; } }
+    .card { background: #0f1630; border: 1px solid #1f2a44; border-radius: 14px; padding: 14px; }
+    label { display: block; font-size: 13px; opacity: 0.9; margin: 10px 0 6px; }
+    input[type="file"], textarea, input[type="text"] {
+      width: 100%; box-sizing: border-box; padding: 10px; border-radius: 10px;
+      border: 1px solid #2b3b63; background: #0b1022; color: #e8eefc;
+      outline: none;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .row { display:flex; gap:10px; flex-wrap: wrap; }
+    button {
+      padding: 10px 12px; border-radius: 10px; border: 1px solid #2b3b63;
+      background: #13214a; color: #e8eefc; cursor: pointer;
+    }
+    button:hover { filter: brightness(1.08); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .pill { display:inline-block; padding:4px 10px; border-radius: 999px; border:1px solid #2b3b63; font-size: 12px; opacity: 0.9; }
+    .muted { opacity: 0.75; font-size: 12px; }
+    table { width:100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border-bottom: 1px solid #1f2a44; padding: 8px; text-align: left; }
+    th { opacity: 0.85; }
+    .ok { color:#7CFC98; }
+    .warn { color:#FFD37C; }
+    .bad { color:#FF7C7C; }
+    .assets { display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; }
+    @media (min-width: 700px){ .assets { grid-template-columns: repeat(3, 1fr); } }
+    .thumb { border: 1px solid #1f2a44; border-radius: 12px; padding: 8px; background: #0b1022; }
+    .thumb img, .thumb video { width: 100%; height: 120px; object-fit: cover; border-radius: 10px; display:block; }
+    .thumb small { display:block; margin-top: 6px; opacity: 0.75; word-break: break-word; }
+    footer { padding: 18px; opacity: 0.7; font-size: 12px; text-align:center; }
+    .checkline { display:flex; gap:10px; align-items:flex-start; margin-top: 10px; }
+    .checkline input { margin-top: 3px; }
+  </style>
+</head>
+
+<body>
+<header>
+  <h1>GENIUS Act – Ads Upload Hub</h1>
+  <p class="muted">Upload contacts + creative assets, validate, hash for Google Ads Customer Match, export CSV.</p>
+</header>
+
+<main>
+  <div class="grid">
+
+    <section class="card">
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <div>
+          <span class="pill">Contacts</span>
+          <span class="pill">Client-side only</span>
+        </div>
+        <div id="status" class="muted">No file loaded.</div>
+      </div>
+
+      <label>Brand / Campaign Name</label>
+      <input id="campaignName" type="text" placeholder="e.g., GENIUS Act Awareness – Abuja" />
+
+      <label>Upload Contacts CSV</label>
+      <input id="csvFile" type="file" accept=".csv,text/csv" />
+
+      <label>Or paste contacts (one per line)</label>
+      <textarea id="pasteBox" placeholder="email@example.com&#10;+2348012345678&#10;another@email.com"></textarea>
+
+      <div class="checkline">
+        <input id="consent" type="checkbox" />
+        <div class="muted">
+          I confirm I have <b>explicit consent</b> to use these contacts for advertising and I will follow Google Ads policies.
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px;">
+        <button id="btnParse">Parse</button>
+        <button id="btnHash" disabled>Hash (SHA-256)</button>
+        <button id="btnExport" disabled>Export CSV</button>
+        <button id="btnClear">Clear</button>
+      </div>
+
+      <div style="margin-top:12px;">
+        <div class="muted">Preview (first 50)</div>
+        <div style="overflow:auto; margin-top:8px; border:1px solid #1f2a44; border-radius: 12px;">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Value</th>
+                <th>Normalized</th>
+                <th>Hashed</th>
+              </tr>
+            </thead>
+            <tbody id="previewBody"></tbody>
+          </table>
+        </div>
+        <div id="counts" class="muted" style="margin-top:8px;"></div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <div>
+          <span class="pill">Media</span>
+          <span class="pill">Images / Video</span>
+        </div>
+        <div class="muted" id="assetCount">0 assets</div>
+      </div>
+
+      <label>Upload Creative Assets</label>
+      <input id="assetFiles" type="file" multiple accept="image/*,video/*" />
+
+      <div style="margin-top:12px;" class="assets" id="assetGrid"></div>
+
+      <div style="margin-top:14px;" class="muted">
+        Tip: Google Ads creatives have size/format rules. This page only organizes files; you still upload creatives inside Google Ads.
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer>
+  Built for lawful marketing workflows. Keep consent records and follow Google Ads policies (Customer Match requires consent + proper formatting).
+</footer>
+
+<script>
+  // ---------- Helpers ----------
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+
+  function normalizeEmail(v){
+    return v.trim().toLowerCase();
+  }
+
+  // Normalize phone to E.164-ish: keep + and digits, ensure leading +
+  function normalizePhone(v){
+    let s = v.trim();
+    // remove spaces, hyphens, parentheses
+    s = s.replace(/[()\-\s]/g, "");
+    // allow leading 00 -> +
+    if (s.startsWith("00")) s = "+" + s.slice(2);
+    // if starts with +, keep; otherwise keep digits only (user may paste 234...)
+    if (!s.startsWith("+")) {
+      s = s.replace(/[^\d]/g, "");
+      if (s.length > 0) s = "+" + s;
+    } else {
+      s = "+" + s.slice(1).replace(/[^\d]/g, "");
+    }
+    return s;
+  }
+
+  function detectType(v){
+    const t = v.trim();
+    if (!t) return null;
+    if (emailRegex.test(t)) return "email";
+    // phone heuristic: digits and plus
+    const digits = t.replace(/[^\d]/g,"");
+    if (digits.length >= 8) return "phone";
+    return "unknown";
+  }
+
+  async function sha256Hex(str){
+    const enc = new TextEncoder().encode(str);
+    const hash = await crypto.subtle.digest("SHA-256", enc);
+    return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2,"0")).join("");
+  }
+
+  function downloadText(filename, text){
+    const blob = new Blob([text], {type: "text/csv;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // ---------- State ----------
+  let records = []; // {raw, type, normalized, hashed}
+  let hashedReady = false;
+
+  // ---------- DOM ----------
+  const statusEl = document.getElementById("status");
+  const countsEl = document.getElementById("counts");
+  const previewBody = document.getElementById("previewBody");
+
+  const csvFile = document.getElementById("csvFile");
+  const pasteBox = document.getElementById("pasteBox");
+  const consent = document.getElementById("consent");
+
+  const btnParse = document.getElementById("btnParse");
+  const btnHash = document.getElementById("btnHash");
+  const btnExport = document.getElementById("btnExport");
+  const btnClear = document.getElementById("btnClear");
+
+  const campaignName = document.getElementById("campaignName");
+
+  const assetFiles = document.getElementById("assetFiles");
+  const assetGrid = document.getElementById("assetGrid");
+  const assetCount = document.getElementById("assetCount");
+
+  function setStatus(msg){ statusEl.textContent = msg; }
+
+  function updateButtons(){
+    const hasData = records.length > 0;
+    btnHash.disabled = !(hasData && consent.checked);
+    btnExport.disabled = !(hasData && hashedReady);
+  }
+
+  function renderPreview(){
+    previewBody.innerHTML = "";
+    const preview = records.slice(0, 50);
+
+    preview.forEach((r, idx) => {
+      const tr = document.createElement("tr");
+
+      const typeClass = r.type === "email" ? "ok" : (r.type === "phone" ? "ok" : "warn");
+      const hashedTxt = r.hashed ? "yes" : "no";
+      const hashedClass = r.hashed ? "ok" : "muted";
+
+      tr.innerHTML = `
+        <td>${idx+1}</td>
+        <td class="${typeClass}">${r.type}</td>
+        <td>${escapeHtml(r.raw)}</td>
+        <td>${escapeHtml(r.normalized || "")}</td>
+        <td class="${hashedClass}">${hashedTxt}</td>
+      `;
+      previewBody.appendChild(tr);
+    });
+
+    const counts = records.reduce((acc, r) => {
+      acc.total++;
+      acc[r.type] = (acc[r.type] || 0) + 1;
+      return acc;
+    }, {total:0});
+
+    countsEl.innerHTML = `
+      Total: <b>${counts.total}</b> •
+      Emails: <b>${counts.email || 0}</b> •
+      Phones: <b>${counts.phone || 0}</b> •
+      Unknown: <b>${counts.unknown || 0}</b>
+      <span class="muted"> (preview shows first 50)</span>
+    `;
+    updateButtons();
+  }
+
+  function escapeHtml(s){
+    return (s ?? "").replace(/[&<>"']/g, m => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[m]));
+  }
+
+  async function parseInputs(){
+    hashedReady = false;
+    records = [];
+
+    const pasted = pasteBox.value
+      .split(/\r?\n/)
+      .map(x => x.trim())
+      .filter(Boolean);
+
+    // If CSV selected, read it (basic parse: split by lines, then commas)
+    let csvLines = [];
+    if (csvFile.files && csvFile.files[0]){
+      const text = await csvFile.files[0].text();
+      csvLines = text.split(/\r?\n/).filter(l => l.trim().length);
+    }
+
+    const collected = [];
+
+    // From CSV: take every cell; this supports CSV with headers like email,phone etc.
+    for (const line of csvLines){
+      const cells = line.split(",").map(c => c.trim());
+      for (const cell of cells){
+        if (cell && cell.toLowerCase() !== "email" && cell.toLowerCase() !== "phone") {
+          collected.push(cell);
+        }
+      }
+    }
+
+    // From paste box
+    collected.push(...pasted);
+
+    // Build records
+    for (const raw of collected){
+      const type = detectType(raw) || "unknown";
+      let normalized = raw.trim();
+
+      if (type === "email") normalized = normalizeEmail(raw);
+      else if (type === "phone") normalized = normalizePhone(raw);
+
+      records.push({ raw, type, normalized, hashed: "" });
+    }
+
+    // Deduplicate by (type + normalized)
+    const seen = new Set();
+    records = records.filter(r => {
+      const key = `${r.type}:${r.normalized}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    setStatus(records.length ? `Loaded ${records.length} unique contacts.` : "No contacts found.");
+    renderPreview();
+  }
+
+  async function hashRecords(){
+    if (!consent.checked){
+      alert("Please confirm consent before hashing/exporting.");
+      return;
+    }
+    // Hash only email/phone; leave unknown blank
+    for (let i=0; i<records.length; i++){
+      const r = records[i];
+      if (r.type === "email" || r.type === "phone"){
+        // Google expects normalized then SHA-256
+        r.hashed = await sha256Hex(r.normalized);
+      }
+    }
+    hashedReady = true;
+    setStatus("Hashed contacts (SHA-256). Ready to export.");
+    renderPreview();
+  }
+
+  function exportCSV(){
+    const name = (campaignName.value || "genius-act").trim().replace(/\s+/g,"-").toLowerCase();
+    // Output format: identifier_type, hashed_identifier
+    // Many workflows accept separate columns; you can adjust later.
+    const rows = [
+      ["identifier_type","hashed_identifier"].join(",")
+    ];
+
+    for (const r of records){
+      if ((r.type === "email" || r.type === "phone") && r.hashed){
+        rows.push([r.type, r.hashed].join(","));
+      }
+    }
+
+    downloadText(`${name}-customer-match-hashed.csv`, rows.join("\n"));
+  }
+
+  function clearAll(){
+    records = [];
+    hashedReady = false;
+    csvFile.value = "";
+    pasteBox.value = "";
+    setStatus("Cleared.");
+    countsEl.textContent = "";
+    previewBody.innerHTML = "";
+    updateButtons();
+  }
+
+  // ---------- Media ----------
+  function renderAssets(files){
+    assetGrid.innerHTML = "";
+    const list = Array.from(files || []);
+    assetCount.textContent = `${list.length} assets`;
+
+    for (const f of list){
+      const url = URL.createObjectURL(f);
+      const box = document.createElement("div");
+      box.className = "thumb";
+
+      if (f.type.startsWith("image/")){
+        box.innerHTML = `<img src="${url}" alt="asset" /><small>${escapeHtml(f.name)}</small>`;
+      } else if (f.type.startsWith("video/")){
+        box.innerHTML = `<video src="${url}" controls></video><small>${escapeHtml(f.name)}</small>`;
+      } else {
+        box.innerHTML = `<div class="muted">Unsupported file</div><small>${escapeHtml(f.name)}</small>`;
+      }
+      assetGrid.appendChild(box);
+    }
+  }
+
+  // ---------- Events ----------
+  btnParse.addEventListener("click", parseInputs);
+  btnHash.addEventListener("click", hashRecords);
+  btnExport.addEventListener("click", exportCSV);
+  btnClear.addEventListener("click", clearAll);
+
+  consent.addEventListener("change", updateButtons);
+
+  assetFiles.addEventListener("change", (e) => {
+    renderAssets(e.target.files);
+  });
+
+  // init
+  updateButtons();
+</script>
+</body>
+</html>
