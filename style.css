@@ -10,6 +10,9 @@
   --blue:#2b6bff;
   --radius:18px;
 }
+html{
+  scroll-behavior:smooth;
+}
 
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
